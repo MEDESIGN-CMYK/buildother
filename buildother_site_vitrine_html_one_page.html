@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BUILDOTHER – Agence immobilière</title>
+  <meta name="description" content="BUILDOTHER – Votre partenaire immobilier de confiance : maîtrise d’ouvrage, promotion, marchand de biens, conseil immobilier." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
+    /* Simple container utility */
+    .container { width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+    /* Soft shadows */
+    .soft { box-shadow: 0 10px 30px rgba(2,6,23,.08), 0 2px 8px rgba(2,6,23,.06); }
+    
+    /* Cartes de la section À propos */
+    .about-card {
+      position: relative;
+      border-radius: 1rem;
+      border: 1px solid #e2e8f0;
+      padding: 1.25rem;
+      transition: all 0.3s ease;
+      background: white;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #5ab132;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+      z-index: 2;
+    }
+    
+    .about-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      border-color: #cbd5e1;
+    }
+    
+    .about-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .about-card p:first-of-type {
+      color: #64748b;
+      font-size: 0.75rem;
+      margin-bottom: 0.25rem;
+      transition: color 0.3s ease;
+    }
+    
+    .about-card:hover p:first-of-type {
+      color: #5ab132;
+    }
+    
+    .about-card p:last-of-type {
+      font-weight: 600;
+      color: #1e293b;
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+    
+    .about-card:hover p:last-of-type {
+      color: #15803d;
+    }
+    
+    /* Cartes avec fond image */
+    .feature-card {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      color: white;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+    }
+    
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%);
+      z-index: 1;
+      border-radius: 1rem;
+    }
+    
+    .feature-card > * {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .feature-card h3 {
+      color: white;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .feature-card p {
+      color: rgba(255,255,255,0.9);
+      margin: 0;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    /* Custom colors */
+    .bg-custom-green { background-color: #5ab132; }
+    .text-custom-green { color: #5ab132; }
+    .hover\:bg-custom-green:hover { background-color: #4a9a2a; }
+    .hover\:text-custom-green:hover { color: #4a9a2a; }
+    /* Card hover effect */
+    .service-card {
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(2,6,23,.15), 0 5px 15px rgba(2,6,23,.1);
+    }
+    /* Project card hover effect */
+    .project-card {
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(2,6,23,.15), 0 5px 15px rgba(2,6,23,.1);
+    }
+    .project-card img {
+      transition: transform 0.5s ease;
+    }
+    .project-card:hover img {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+  <body class="bg-slate-50 text-slate-800">
+  <!-- BANDEAU DE CONTACT -->
+  <div class="fixed top-0 inset-x-0 z-50 bg-custom-green text-white text-sm py-2">
+    <div class="container flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        <a href="mailto:support@buildother.com" class="hover:underline">support@buildother.com</a>
+      </div>
+      <div class="flex flex-wrap items-center gap-6">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <span>Appelez-nous : <a href="tel:+123456777888999" class="hover:underline">(+123) 456 777 888 999</a></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>Ouvert aujourd'hui : 9h - 17h</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- NAVBAR -->
+  <header class="fixed top-8 inset-x-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="container flex items-center justify-between py-3">
+      <a href="#home" class="flex items-center">
+        <img src="image/logo-BUILDOTHER.png" alt="BUILDOTHER Logo" class="h-20">
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="#home" class="hover:text-slate-900">Accueil</a>
+        <a href="#about" class="hover:text-slate-900">À propos</a>
+        <a href="#services" class="hover:text-slate-900">Services</a>
+        <a href="#projects" class="hover:text-slate-900">Projets</a>
+        <a href="#contact" class="hover:text-slate-900">Contact</a>
+        <a href="#contact" class="ml-3 inline-flex items-center rounded-xl px-4 py-2 bg-custom-green text-white hover:bg-[#4a9a2a] soft transition-colors">Contactez‑nous</a>
+      </nav>
+      <button id="menuBtn" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-300" aria-label="Ouvrir le menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white">
+      <div class="container py-3 grid gap-3 text-sm">
+        <a href="#home" class="py-2" onclick="toggleMenu(false)">Accueil</a>
+        <a href="#about" class="py-2" onclick="toggleMenu(false)">À propos</a>
+        <a href="#services" class="py-2" onclick="toggleMenu(false)">Services</a>
+        <a href="#projects" class="py-2" onclick="toggleMenu(false)">Projets</a>
+        <a href="#contact" class="py-2" onclick="toggleMenu(false)">Contact</a>
+        <a href="#contact" class="inline-flex items-center justify-center rounded-xl px-4 py-2 bg-custom-green text-white hover:bg-[#4a9a2a] soft transition-colors" onclick="toggleMenu(false)">Contactez‑nous</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-28 md:pt-32">
+    <!-- HERO -->
+    <section id="home" class="pt-24 md:pt-28">
+      <div class="container grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
+            BUILDOTHER – Votre partenaire immobilier de confiance
+          </h1>
+          <p class="mt-4 text-lg text-slate-600">
+            Spécialistes en gestion de projets immobiliers, promotion, marchand de biens
+            et conseil, implantés à Saint‑Didier‑au‑Mont‑d’Or.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#services" class="inline-flex rounded-xl px-5 py-3 bg-custom-green text-white hover:bg-[#4a9a2a] soft">Découvrir nos services</a>
+            <a href="#contact" class="inline-flex rounded-xl px-5 py-3 border border-slate-300 hover:bg-slate-100">Parlons‑en</a>
+          </div>
+          <ul class="mt-6 text-sm text-slate-500 grid gap-1">
+            <li>• Proximité • Performance • Transparence</li>
+          </ul>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] w-full rounded-3xl overflow-hidden soft bg-slate-200">
+            <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1600&auto=format&fit=crop" alt="Architecture immobilière" class="h-full w-full object-cover"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- A PROPOS -->
+    <section id="about" class="py-16 md:py-24">
+      <div class="container grid md:grid-cols-2 gap-10 items-center">
+        <div class="order-2 md:order-1">
+          <h2 class="text-2xl md:text-4xl font-extrabold">Qui sommes‑nous ?</h2>
+          <p class="mt-4 text-slate-600">
+            Fondée en 2021, BUILDOTHER est une SAS spécialisée dans la maîtrise d’ouvrage,
+            la promotion immobilière, le marchand de biens et le conseil immobilier. Filiale
+            du Groupe Archipelle, nous capitalisons sur une expertise reconnue pour
+            accompagner chaque étape de vos projets.
+          </p>
+          <div class="mt-6 grid sm:grid-cols-3 gap-4">
+            <div class="about-card">
+              <p>Notre mission</p>
+              <p>Accompagner avec rigueur</p>
+            </div>
+            <div class="about-card">
+              <p>Notre vision</p>
+              <p>Créer des projets durables</p>
+            </div>
+            <div class="about-card">
+              <p>Ancrage</p>
+              <p>Rhône & région lyonnaise</p>
+            </div>
+          </div>
+          <a href="#contact" class="mt-6 inline-flex rounded-xl px-5 py-3 border border-slate-300 hover:bg-slate-100">Rencontrez notre équipe</a>
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="aspect-[4/3] w-full rounded-3xl overflow-hidden soft bg-slate-200">
+            <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1600&auto=format&fit=crop" alt="À propos BUILDOTHER" class="h-full w-full object-cover"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-16 md:py-24 bg-white">
+      <div class="container">
+        <h2 class="text-2xl md:text-4xl font-extrabold text-center">Nos expertises immobilières</h2>
+        <p class="mt-3 max-w-2xl mx-auto text-center text-slate-600">Accompagnement de A à Z, de la conception à la livraison, pour valoriser chaque opération.</p>
+        <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Service 1 - Maîtrise d'ouvrage -->
+          <div class="group relative overflow-hidden rounded-2xl border border-slate-200 p-6 bg-white hover:shadow-lg transition-all duration-300 service-card">
+            <div class="h-14 w-14 rounded-xl bg-custom-green text-white flex items-center justify-center text-xl font-bold mb-4 transition-transform group-hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 group-hover:text-custom-green transition-colors">Maîtrise d'ouvrage</h3>
+            <p class="mt-3 text-slate-600 leading-relaxed">Pilotage intégral de vos projets immobiliers avec une approche sur mesure et des solutions innovantes.</p>
+            <div class="mt-6 pt-4 border-t border-slate-100">
+              <a href="#contact" class="inline-flex items-center text-sm font-medium text-custom-green hover:text-[#4a9a2a] group transition-colors">
+                En savoir plus
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <!-- Service 2 - Promotion immobilière -->
+          <div class="group relative overflow-hidden rounded-2xl border border-slate-200 p-6 bg-white hover:shadow-lg transition-all duration-300 service-card">
+            <div class="h-14 w-14 rounded-xl bg-custom-green text-white flex items-center justify-center text-xl font-bold mb-4 transition-transform group-hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 group-hover:text-custom-green transition-colors">Promotion immobilière</h3>
+            <p class="mt-3 text-slate-600 leading-relaxed">Développement de programmes résidentiels sur mesure, de la conception à la livraison, en adéquation avec les attentes du marché.</p>
+            <div class="mt-6 pt-4 border-t border-slate-100">
+              <a href="#contact" class="inline-flex items-center text-sm font-medium text-custom-green hover:text-[#4a9a2a] group transition-colors">
+                En savoir plus
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <!-- Service 3 - Marchand de biens -->
+          <div class="group relative overflow-hidden rounded-2xl border border-slate-200 p-6 bg-white hover:shadow-lg transition-all duration-300 service-card">
+            <div class="h-14 w-14 rounded-xl bg-custom-green text-white flex items-center justify-center text-xl font-bold mb-4 transition-transform group-hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 group-hover:text-custom-green transition-colors">Marchand de biens</h3>
+            <p class="mt-3 text-slate-600 leading-relaxed">Expertise en acquisition, rénovation et valorisation de biens immobiliers à fort potentiel de plus-value.</p>
+            <div class="mt-6 pt-4 border-t border-slate-100">
+              <a href="#contact" class="inline-flex items-center text-sm font-medium text-custom-green hover:text-[#4a9a2a] group transition-colors">
+                En savoir plus
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <!-- Service 4 - Conseil immobilier -->
+          <div class="group relative overflow-hidden rounded-2xl border border-slate-200 p-6 bg-white hover:shadow-lg transition-all duration-300 service-card">
+            <div class="h-14 w-14 rounded-xl bg-custom-green text-white flex items-center justify-center text-xl font-bold mb-4 transition-transform group-hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 group-hover:text-custom-green transition-colors">Conseil immobilier</h3>
+            <p class="mt-3 text-slate-600 leading-relaxed">Stratégie personnalisée, analyse de marché et optimisation de vos investissements immobiliers.</p>
+            <div class="mt-6 pt-4 border-t border-slate-100">
+              <a href="#contact" class="inline-flex items-center text-sm font-medium text-custom-green hover:text-[#4a9a2a] group transition-colors">
+                En savoir plus
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="mt-10 text-center">
+          <a href="#contact" class="inline-flex items-center gap-2 rounded-xl px-6 py-3 bg-custom-green text-white hover:bg-[#4a9a2a] hover:text-white soft transition-colors">Demandez un rendez‑vous</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- POURQUOI NOUS CHOISIR -->
+    <section class="py-16 md:py-24 bg-slate-50">
+      <div class="container">
+        <h2 class="text-2xl md:text-4xl font-extrabold text-center">Pourquoi nous choisir ?</h2>
+        <p class="mt-3 max-w-2xl mx-auto text-center text-slate-600 mb-12">L'excellence immobilière à votre service, de la conception à la réalisation de vos projets</p>
+        <div class="grid lg:grid-cols-3 gap-6">
+          <div class="feature-card p-6" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+            <h3 class="font-bold text-lg">Expertise locale</h3>
+            <p class="mt-2 text-sm">Ancrés à Saint‑Didier‑au‑Mont‑d'Or, nous connaissons finement le marché du Rhône.</p>
+          </div>
+          <div class="feature-card p-6" style="background-image: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+            <h3 class="font-bold text-lg">Accompagnement sur mesure</h3>
+            <p class="mt-2 text-sm">Une équipe dédiée pour sécuriser chaque étape de votre projet.</p>
+          </div>
+          <div class="feature-card p-6" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+            <h3 class="font-bold text-lg">Transparence & performance</h3>
+            <p class="mt-2 text-sm">Des process clairs et des rapports réguliers pour piloter avec confiance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETS -->
+    <section id="projects" class="py-16 md:py-24 bg-white">
+      <div class="container">
+        <div class="flex items-end justify-between gap-6 flex-wrap">
+          <div>
+            <h2 class="text-2xl md:text-4xl font-extrabold">Nos projets</h2>
+            <p class="mt-3 text-slate-600 max-w-2xl">Découvrez une sélection de références : promotion, transformations et opérations de maîtrise d’ouvrage dans la région lyonnaise.</p>
+          </div>
+          <a href="#contact" class="inline-flex rounded-xl px-5 py-3 border border-slate-300 hover:bg-slate-100">Voir plus de projets</a>
+        </div>
+        <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <article class="rounded-2xl overflow-hidden soft bg-slate-50 border border-slate-200 project-card">
+            <img class="h-44 w-full object-cover" src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=1600&auto=format&fit=crop" alt="Projet 1"/>
+            <div class="p-5">
+              <h3 class="font-semibold">Résidentiel – Mont‑d’Or</h3>
+              <p class="mt-1 text-sm text-slate-600">Programme de 18 logements — Livraison 2026</p>
+            </div>
+          </article>
+          <!-- Card 2 -->
+          <article class="rounded-2xl overflow-hidden soft bg-slate-50 border border-slate-200 project-card">
+            <img class="h-44 w-full object-cover" src="https://images.unsplash.com/photo-1486304873000-235643847519?q=80&w=1600&auto=format&fit=crop" alt="Projet 2"/>
+            <div class="p-5">
+              <h3 class="font-semibold">Réhabilitation – Lyon 6e</h3>
+              <p class="mt-1 text-sm text-slate-600">Transformation d’un immeuble patrimonial</p>
+            </div>
+          </article>
+          <!-- Card 3 -->
+          <article class="rounded-2xl overflow-hidden soft bg-slate-50 border border-slate-200 project-card">
+            <img class="h-44 w-full object-cover" src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?q=80&w=1600&auto=format&fit=crop" alt="Projet 3"/>
+            <div class="p-5">
+              <h3 class="font-semibold">Marchand de biens – Tassin</h3>
+              <p class="mt-1 text-sm text-slate-600">Acquisition & valorisation — 2024</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA INTERMEDIAIRE -->
+    <section class="py-16">
+      <div class="container">
+        <div class="rounded-3xl p-8 md:p-12 bg-custom-green text-white soft flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 class="text-2xl md:text-3xl font-extrabold">Vous avez un projet immobilier ?</h3>
+            <p class="mt-2 text-white/90">Échangeons autour de vos objectifs et construisons une feuille de route efficace.</p>
+          </div>
+          <a href="#contact" class="inline-flex rounded-xl px-6 py-3 bg-white text-custom-green hover:bg-white/90 transition-colors">Contactez‑nous</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-16 md:py-24 bg-white">
+      <div class="container grid lg:grid-cols-2 gap-10">
+        <div>
+          <h2 class="text-2xl md:text-4xl font-extrabold">Parlons de votre projet</h2>
+          <p class="mt-3 text-slate-600">Notre équipe est à votre disposition pour répondre à vos questions, organiser une visite ou vous conseiller.</p>
+          <div class="mt-8 grid gap-4">
+            <div class="rounded-2xl border border-slate-200 p-5 bg-slate-50 soft">
+              <p class="text-sm text-slate-500">Adresse</p>
+              <p class="font-medium">11 Rue de la Voie Lactée, 69370 Saint‑Didier‑au‑Mont‑d’Or</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 p-5 bg-slate-50 soft">
+              <p class="text-sm text-slate-500">Email</p>
+              <p class="font-medium">contact@buildother.fr</p>
+            </div>
+          </div>
+        </div>
+        <form class="bg-slate-50 rounded-3xl p-6 border border-slate-200 soft">
+          <div class="grid gap-4">
+            <div>
+              <label class="text-sm text-slate-600">Nom complet</label>
+              <input type="text" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-300" placeholder="Votre nom" />
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm text-slate-600">Email</label>
+                <input type="email" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-300" placeholder="vous@exemple.com" />
+              </div>
+              <div>
+                <label class="text-sm text-slate-600">Téléphone</label>
+                <input type="tel" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-300" placeholder="+33 ..." />
+              </div>
+            </div>
+            <div>
+              <label class="text-sm text-slate-600">Message</label>
+              <textarea rows="5" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-300" placeholder="Parlez‑nous de votre projet..."></textarea>
+            </div>
+            <button type="submit" class="mt-2 inline-flex items-center justify-center rounded-xl px-5 py-3 bg-slate-900 text-white hover:bg-slate-800">Envoyer ma demande</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="container py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <img src="image/footer-BUILDOTHER.png" alt="BUILDOTHER Logo" class="h-10">
+        <p class="text-sm text-center md:text-left">© <span id="year"></span> Tous droits réservés.</p>
+      </div>
+      <nav class="flex items-center gap-6 text-sm">
+        <a href="#about" class="hover:text-slate-900">À propos</a>
+        <a href="#services" class="hover:text-slate-900">Services</a>
+        <a href="#projects" class="hover:text-slate-900">Projets</a>
+        <a href="#contact" class="hover:text-slate-900">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function toggleMenu(forceClose){
+      if(forceClose===false){ mobileMenu.classList.add('hidden'); return; }
+      mobileMenu.classList.toggle('hidden');
+    }
+    menuBtn.addEventListener('click', () => toggleMenu());
+
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
