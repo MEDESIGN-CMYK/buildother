@@ -1,13 +1,11 @@
-# buildother
+# Buildother
 # MEDESIGN-CMYK – Site Vitrine HTML
 
-////////////////////
 📞 Contact
 Pour toute question ou demande de collaboration :
 Mohamed Azizi
 📧 mohazizi686@gmail.com
 📞 +212 65 546 6408
-////////////////////
 
 Bienvenue sur le dépôt GitHub du ** site vitrine Buildother **, un site HTML statique one-page, conçu pour présenter une entreprise ou un projet de manière professionnelle.
 
